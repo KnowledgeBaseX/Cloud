@@ -102,4 +102,25 @@ GKE
 		- Build Image
 		- Push image to Artifact Registry
 		- Create K8s Deployment manifest which references location of image
-		- Use kubectl to reference manifest and deploy
+		- Use kubectl to reference manifest and deploy ~ this is cube control
+
+Cloud Run
+	- Fully managed
+	- Containers with no control
+	- Containers invocable via HTTP request
+	- Stateless, API, microservices
+	- Autoscaling
+		- Dynamically performs horizontal autoscaling (adding instance)
+		- Can scale down to zero (0 instances when no traffic). Remember invoked through HTTP Request
+
+
+App Engine
+	- Fully managed
+	- You come up with source code and Google provide runnable env (PAAS)
+
+
+Cloud Run Functions
+	- Fully managed
+	- Event driven
+	- Autoscaling
+		- execution time, memory, cpu
