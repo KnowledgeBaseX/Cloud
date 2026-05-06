@@ -1,1 +1,81 @@
 
+Structure
+	Org -> Folders -> Projects -> Resources
+	Can have folders inside folders
+
+- Org Policy
+	- AP Visual Basic
+		- Admin
+		- Policy Admin
+		- Viewer
+			View, usueful for auditors
+		- Browser
+			Can see metadata
+
+
+- IAM
+	Service to manage Who has which access on what
+	- WHO, WHICH, WHAT
+		- Who -> Principal (User, Service Account)
+		- Which -> Access (Permission / Role)
+		- What -> Resources / Services
+
+	- Role
+		- Collection of permissions grouped together
+			- Basic
+			- Predefined
+			- Custom
+
+- Cloud Logging
+	- Store logs
+	- Logs ~ http, access logs
+
+
+- Cloud Monitoring
+	- Store, Analyzed, Visualize metrics
+	- Metrics (CPU Utilization, Memory, N/W utilization)
+
+
+Compute
+	- Managed
+		- Google will manage updates, configuration, patching
+	- Unmanaged
+		- Customer will manage updates, configuration, patching
+
+	- Compute Engine
+		- Unmanaged
+		- First point of migration
+		- Managed Instance Group (MIG)
+			- Adding mgmt layer on top of Compute Engine
+			- Can be setup with autoscaling on the basis of CPU utilization metric (default)
+			- It has instance template for defining what we need
+		- Gradual Deployment
+			- Min risk while applying patches
+			- has maxSurge and maxUnavailable params to control the behavior
+			- recommended value 1 and 0 ~ means add 1 VM without stopping any (0) VM until that one VM is fully operational
+	- GKE
+		- You come up with container image, K8 configuration
+		- Partially managed
+		- Container with full control
+		- Microservice, API
+	- Cloud Run
+		- You come up with container image, google will provide everything
+		- Fully managed
+		- Container with no control
+		- Statless app, API, microservices
+	- App Engine
+		- You come up with source code google will provide everything
+		- Fully managed
+	- Cloud Run Functions
+		- Functions
+		- Fully managed
+		- Useful for event based arch
+
+GKE
+	- Cluster: Collection of Nodes
+	- Node: Virual Machine. Runs multiple pods
+	- Pod: Smallest deployable unit in Kubernetes. Can have one or more containers
+	- Preemptible Nodes ~ Spot nodes
+		- Batch jobs
+		- Stateless, Can tolerate interuption
+
