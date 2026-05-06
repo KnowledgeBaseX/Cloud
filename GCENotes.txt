@@ -79,3 +79,27 @@ GKE
 		- Batch jobs
 		- Stateless, Can tolerate interuption
 
+	- Autoscaling
+		- Cluster Autoscaler
+			- Scales # of nodes in the cluster
+			- Best practice set min and max nodes
+		- Horizontal Pod Autoscaler
+			- Scales # of podes
+			- Don't restart pods. Add/remove instead
+			- Can scale based on CPU/mem
+		- Vertical Pod Autoscaler
+			- Scales Compute and memory of individual pods
+			- May restart pods
+			- Can't be done on custom metrics
+	- Autopilot
+		- Fully manged GKE
+	- Kubernetes Secrets
+		- To store sensitive data
+		- Stored in K8s pods
+
+	- Deploying through Dockerfiles
+		- Create Dockerfile
+		- Build Image
+		- Push image to Artifact Registry
+		- Create K8s Deployment manifest which references location of image
+		- Use kubectl to reference manifest and deploy
