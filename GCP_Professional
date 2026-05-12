@@ -1,0 +1,91 @@
+# GCP Professional Architect Notes
+
+## GCP Fundamentals
+
+---
+
+## GCLOUD
+
+### Configuration
+
+#### Create a new configuration
+```bash
+gcloud config configuration create <name>
+```
+
+#### Set properties for a configuration
+```bash
+gcloud config set project <project_id>
+gcloud config set compute/zone <zone>
+gcloud config set compute/region <region>
+```
+
+#### Activate a configuration
+```bash
+gcloud config configuration activate <name>
+```
+
+---
+
+### Authentication & Setup
+
+Before using any `gcloud` command you must authenticate and set a default project:
+
+```bash
+gcloud auth login
+gcloud config set project <project_id>
+```
+
+#### Useful commands
+```bash
+gcloud init                      # Guide through initial settings
+gcloud projects list             # List all projects
+gcloud services list             # List enabled services
+gcloud projects describe         # Describe a project
+gcloud compute instances list    # List compute instances
+```
+
+---
+
+## Cloud Shell
+
+- Fully managed, browser-based command-line environment directly in the Google Cloud Console
+- Comes with Google Cloud SDK and `gcloud` pre-installed
+- 5 GB of persistent storage
+- Security patches managed by Google
+- Includes a built-in Cloud Shell Editor (code editor)
+
+### Persistent Storage Structure
+~ (home directory)
+├── tools/
+├── projects/
+└── bin/        ← Scripts here can be executed by name (included in default PATH)
+
+### DevOps Use Cases
+- Manage GCP resources without an external IP or SSH access
+
+---
+
+## Resource Hierarchy
+
+### Organization
+- Top-level container representing an entire company, org, or division
+- Optional but useful when managing multiple projects
+- Can contain multiple projects
+- Tied to **Cloud Identity** or **Google Workspace**
+
+### Folders
+- Sit between the Org and Projects layers
+- Optional
+- Used to organize projects into logical groups (e.g., by department)
+- Folders can be nested inside other folders
+
+### Projects
+- Lowest unit of the Org hierarchy
+- Where GCP resources and services reside
+- Serves as a distinct entity for **billing**, **access management**, and **API settings**
+- You must be inside a project to use GCP
+
+---
+
+> **Hierarchy summary:** `Organization → Folders → Projects → Resources`
