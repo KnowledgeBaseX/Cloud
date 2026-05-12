@@ -1,91 +1,118 @@
-# GCP Professional Architect Notes
-
-## GCP Fundamentals
-
----
-
+###############################################################################################################################################
+# GCP Fundamentals
 ## GCLOUD
-
 ### Configuration
-
-#### Create a new configuration
+#### Create new configuration
 ```bash
 gcloud config configuration create <name>
 ```
 
-#### Set properties for a configuration
+#### Setting properties for a configuration
 ```bash
 gcloud config set project <project_id>
 gcloud config set compute/zone <zone>
 gcloud config set compute/region <region>
 ```
 
-#### Activate a configuration
+#### Activate configuration
 ```bash
 gcloud config configuration activate <name>
 ```
 
----
-
-### Authentication & Setup
-
-Before using any `gcloud` command you must authenticate and set a default project:
-
+#### Before using any gcloud command you must 
+#### Authenticate
 ```bash
 gcloud auth login
+```
+
+#### Set default project
+```bash
 gcloud config set project <project_id>
 ```
 
-#### Useful commands
-```bash
-gcloud init                      # Guide through initial settings
-gcloud projects list             # List all projects
-gcloud services list             # List enabled services
-gcloud projects describe         # Describe a project
-gcloud compute instances list    # List compute instances
-```
-
----
+#### Guide through settings
+gcloud init
+gcloud projects list
+gcloud serverices list
+gcloud projects describe
+gcloud compute instances list
 
 ## Cloud Shell
+- Fully managed, browser based command line env directly in google cloud console
+- Comes with Google cloud SDK, gcloud preinstalled
+- 5GB of persistent storage
+- Security/patches managed by Google
+- Cloud Shell Editor(code editor)
+- Storing script for persistence
+	- ~: home dir
+	   |-> tools
+	   |-> projects
+	   |-> bin: scripts here can be executed directly by there name. Included in env default PATH
+- Useful for DevOps
+	- Manage GCP resources without external IP or SSH
 
-- Fully managed, browser-based command-line environment directly in the Google Cloud Console
-- Comes with Google Cloud SDK and `gcloud` pre-installed
-- 5 GB of persistent storage
-- Security patches managed by Google
-- Includes a built-in Cloud Shell Editor (code editor)
-
-### Persistent Storage Structure
-~ (home directory)
-├── tools/
-├── projects/
-└── bin/        ← Scripts here can be executed by name (included in default PATH)
-
-### DevOps Use Cases
-- Manage GCP resources without an external IP or SSH access
-
----
 
 ## Resource Hierarchy
+- Org
+	- top level container
+	- Represent entire company/org/division. Optional but useful while managing multiple projects
+	- Org contains multiple projects
+	- Tied to Cloud Identity or Google Workspace
 
-### Organization
-- Top-level container representing an entire company, org, or division
-- Optional but useful when managing multiple projects
-- Can contain multiple projects
-- Tied to **Cloud Identity** or **Google Workspace**
+- Folders
+	- Seats between Org and Projects
+	- Optional
+	- Used to org projects in logical group such as dept
+	- Folders can have folders inside it
 
-### Folders
-- Sit between the Org and Projects layers
-- Optional
-- Used to organize projects into logical groups (e.g., by department)
-- Folders can be nested inside other folders
+- Projects
+	- lowest unit of ORG
+	- Place where GCP resources/services resides
+	- Serves as distinct entity for billing, access mgmt, APIs settings
+	- You must be in a projcet in order to use GCP
 
-### Projects
-- Lowest unit of the Org hierarchy
-- Where GCP resources and services reside
-- Serves as a distinct entity for **billing**, **access management**, and **API settings**
-- You must be inside a project to use GCP
+## Project Name, ID, Number
+- Project Name
+	- Human readable
+	- Can be edited anytime
+	- Does not have to be unique
 
----
+- Project Id
+	- Alphanumeric
+	- Immutable
+	- Globally Unique
+	- Use it for gcloud 
 
-> **Hierarchy summary:** `Organization → Folders → Projects → Resources`
+- Project Number
+	- Numeric
+	- Can not be choosen
+	- Globally Unique
+	- Used by Google
+
+## Org Policy
+- Control - How resouces can be used
+- ability to enforce policies on resource usage and constraints
+	- For eg not allowing to have public ip to VMs
+- domain restriction
+- Org policy must know
+	- constraints/compute.resourceLocations: Operate within certain geographic location
+	- constraints/iam.allowedPolicyMemberDomains: Control which domains user must belong to in order to be added in IAM
+	= constraints/compute.vmExternalIpAccess: No external IPs for VM
+	= constraints/compute.requireOsLogin: Must use IAM to control SSH access to VM
+- Allowlist and Denylist
+	- Allowlist: Defines what is explicitly permitted. Blocks everything else
+	- Denylist: Defines what is explicitly denied. Permits everything else
+- Org policy can be setup at any level such as org, folder, project. Inherited by lower level
+- Org policy can be overriden at lower level through exceptions. Lower level cannot relax the policy
+- The effective policy at a given node is determined by combining all inherited policies with the strictest policies taking precedence
+
+## Org Role
+- Org Admin: Full access to all resources within the org
+- Org Policy Admin: Manages org policies, constraints, conditions
+- Viewer: View only access, useful for auditor and monitoring
+- Browser: Read only access to view structure, metadata of projects and folder
+- The effective IAM policies at the project level are the union of both the organization-level and project-level policies, meaning all policies from the entire Venn diagram apply. 
+###############################################################################################################################################
+###############################################################################################################################################
+###############################################################################################################################################
+###############################################################################################################################################
